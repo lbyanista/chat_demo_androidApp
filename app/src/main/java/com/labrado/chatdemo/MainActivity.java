@@ -28,9 +28,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import Fragments.ChatsFragment;
-import Fragments.UsersFragment;
-import Model.User;
+import com.labrado.chatdemo.Fragments.ChatsFragment;
+import com.labrado.chatdemo.Fragments.UsersFragment;
+import com.labrado.chatdemo.Model.User;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {

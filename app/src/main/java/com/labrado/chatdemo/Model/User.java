@@ -1,4 +1,4 @@
-package Model;
+package com.labrado.chatdemo.Model;
 
 public class User {
 

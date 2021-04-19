@@ -1,4 +1,4 @@
-package Fragments;
+package com.labrado.chatdemo.Fragments;
 
 import android.os.Bundle;
 

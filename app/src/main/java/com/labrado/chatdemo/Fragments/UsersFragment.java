@@ -1,4 +1,4 @@
-package Fragments;
+package com.labrado.chatdemo.Fragments;
 
 import android.os.Bundle;
 
@@ -23,8 +23,8 @@ import com.labrado.chatdemo.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import Adapter.UserAdapter;
-import Model.User;
+import com.labrado.chatdemo.Adapter.UserAdapter;
+import com.labrado.chatdemo.Model.User;
 
 public class UsersFragment extends Fragment {
 
