@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -18,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import com.labrado.chatdemo.Model.User;
@@ -30,6 +35,9 @@ public class MessageActivity extends AppCompatActivity {
 
     FirebaseUser fuser;
     DatabaseReference reference;
+
+    ImageButton send_btn;
+    EditText text_send;
 
     Intent intent;
 
@@ -46,11 +54,25 @@ public class MessageActivity extends AppCompatActivity {
 
         profile_image = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
+        send_btn = findViewById(R.id.send_btn);
+        text_send = findViewById(R.id.text_send);
 
         intent = getIntent();
         String userid = intent.getStringExtra("userid");
-
         fuser = FirebaseAuth.getInstance().getCurrentUser();
+
+        send_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = text_send.getText().toString();
+                if (!msg.equals(""))
+                    sendMessage(fuser.getUid(), userid, msg);
+                else
+                    Toast.makeText(MessageActivity.this, "Empty message", Toast.LENGTH_SHORT).show();
+                text_send.setText("");
+            }
+        });
+
         reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -71,5 +93,17 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void sendMessage(String sender, String receiver, String message)
+    {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("sender", sender);
+        hashMap.put("receiver", receiver);
+        hashMap.put("message", message);
+
+        reference.child("Chats").push().setValue(hashMap);
     }
 }
