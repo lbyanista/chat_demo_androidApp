@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import com.labrado.chatdemo.Fragments.ChatsFragment;
+import com.labrado.chatdemo.Fragments.ProfileFragment;
 import com.labrado.chatdemo.Fragments.UsersFragment;
 import com.labrado.chatdemo.Model.User;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -86,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
 
         viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
         viewPagerAdapter.addFragment(new UsersFragment(), "Users");
+        viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
+
 
         viewPager.setAdapter(viewPagerAdapter);
 
