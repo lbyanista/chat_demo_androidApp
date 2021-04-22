@@ -73,10 +73,12 @@ public class UsersFragment extends Fragment {
         return view;
     }
 
-    private void searchUsers(String a) {
+    private void searchUsers(String s) {
 
         FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("username").startAt(a).endAt(a+"\uf8ff");
+        Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("search")
+                .startAt(s)
+                .endAt(s+"\uf8ff");
 
         query.addValueEventListener(new ValueEventListener() {
             @Override

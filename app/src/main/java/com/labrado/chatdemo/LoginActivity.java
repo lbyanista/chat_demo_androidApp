@@ -41,24 +41,18 @@ public class LoginActivity extends AppCompatActivity {
             String txt_password = Objects.requireNonNull(password.getText()).toString();
 
             if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password))
-            {
                 Toast.makeText(LoginActivity.this, "All fileds are required", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
+            else {
                 auth.signInWithEmailAndPassword(txt_email, txt_password)
                         .addOnCompleteListener(task -> {
-                            if (task.isSuccessful())
-                            {
+                            if (task.isSuccessful()) {
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
                             }
                             else
-                            {
                                 Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
-                            }
                         });
             }
         });

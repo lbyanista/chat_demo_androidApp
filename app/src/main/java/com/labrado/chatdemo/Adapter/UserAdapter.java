@@ -21,9 +21,9 @@ import com.labrado.chatdemo.Model.User;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
-    private  Context mContext;
-    private  List<User> mUsers;
-    private  boolean isChat;
+    private final Context mContext;
+    private final List<User> mUsers;
+    private final boolean isChat;
 
     public UserAdapter(Context mContext, List<User> mUsers, boolean isChat)
     {
@@ -50,16 +50,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
         else
             Glide.with(mContext).load(user.getImageURL()).into(holder.profile_image);
-        if (!isChat)
+        if (!isChat) {
             if (user.getStatus().equals("online")) {
                 holder.img_on.setVisibility(View.VISIBLE);
                 holder.img_off.setVisibility(View.GONE);
             } else {
                 holder.img_on.setVisibility(View.GONE);
                 holder.img_off.setVisibility(View.VISIBLE);
-            } else {
-            holder.img_on.setVisibility(View.GONE);
-            holder.img_off.setVisibility(View.GONE);
+            }
+        } else {
+                holder.img_on.setVisibility(View.GONE);
+                holder.img_off.setVisibility(View.GONE);
         }
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, MessageActivity.class);

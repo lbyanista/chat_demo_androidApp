@@ -24,9 +24,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public static final int MSG_TYPE_RIGHT = 1;
 
 
-    private Context mContext;
-    private List<Chat> mChat;
-    private String imageurl;
+    private final Context mContext;
+    private final List<Chat> mChat;
+    private final String imageurl;
 
     FirebaseUser fuser;
 
@@ -40,13 +40,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @NonNull
     @Override
     public MessageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view;
         if (viewType == MSG_TYPE_RIGHT) {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_right, parent, false);
-            return new MessageAdapter.ViewHolder(view);
+            view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_right, parent, false);
         } else {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_left, parent, false);
-            return new MessageAdapter.ViewHolder(view);
+            view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_left, parent, false);
         }
+        return new ViewHolder(view);
     }
 
     @Override
@@ -67,8 +67,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         return mChat.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView show_message;
         public ImageView profile_image;
 
@@ -79,7 +78,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             profile_image = itemView.findViewById(R.id.profile_image);
         }
     }
-
 
     @Override
     public int getItemViewType(int position) {

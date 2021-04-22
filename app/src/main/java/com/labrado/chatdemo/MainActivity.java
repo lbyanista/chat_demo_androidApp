@@ -117,15 +117,13 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter
-    {
+    static class ViewPagerAdapter extends FragmentPagerAdapter {
 
-        private ArrayList<Fragment> fragments;
-        private ArrayList<String> titles;
+        private final ArrayList<Fragment> fragments;
+        private final ArrayList<String> titles;
 
-        ViewPagerAdapter(FragmentManager fm)
-        {
-            super(fm);
+        ViewPagerAdapter(FragmentManager fm) {
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
             this.fragments = new ArrayList<>();
             this.titles = new ArrayList<>();
 
@@ -142,8 +140,7 @@ public class MainActivity extends AppCompatActivity {
             return fragments.size();
         }
 
-        public void addFragment(Fragment fragment, String title)
-        {
+        public void addFragment(Fragment fragment, String title) {
             fragments.add(fragment);
             titles.add(title);
         }
@@ -155,8 +152,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void status(String status)
-    {
+    private void status(String status) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("status", status);

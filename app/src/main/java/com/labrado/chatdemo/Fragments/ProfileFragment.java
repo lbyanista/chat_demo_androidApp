@@ -135,12 +135,10 @@ public class ProfileFragment extends Fragment {
                         reference.updateChildren(map);
 
                         pd.dismiss();
-                    }
-                    else {
+                    } else {
                         Toast.makeText(getContext(), "Failed!", Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     }
-
                 }
             }).addOnFailureListener(e -> {
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
