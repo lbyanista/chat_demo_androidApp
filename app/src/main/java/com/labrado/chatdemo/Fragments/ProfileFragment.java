@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -36,6 +35,7 @@ import com.labrado.chatdemo.Model.User;
 import com.labrado.chatdemo.R;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -70,12 +70,13 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
+                assert user != null;
                 username.setText(user.getUsername());
 
                 if (user.getImageURL().equals("default"))
                     image_profile.setImageResource(R.mipmap.ic_launcher);
                 else
-                    Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
+                    Glide.with(Objects.requireNonNull(getContext())).load(user.getImageURL()).into(image_profile);
             }
 
             @Override
@@ -97,7 +98,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private String getFileExtension(Uri uri){
-        ContentResolver contentResolver = getContext().getContentResolver();
+        ContentResolver contentResolver = Objects.requireNonNull(getContext()).getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
@@ -108,12 +109,7 @@ public class ProfileFragment extends Fragment {
         pd.show();
 
         if (imageUri != null) {
-<<<<<<< HEAD
-            final StorageReference fileReference = storageReference.child(System.currentTimeMillis()
-                    +"."+getFileExtension(imageUri));
-=======
             final StorageReference fileReference = storageReference.child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
->>>>>>> ee9d793a022c6701a06570b913551fd075fede20
 
             uploadTask = fileReference.getFile(imageUri);
             uploadTask.continueWith(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -128,13 +124,9 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
 
-<<<<<<< HEAD
-                    if (task.isSuccessful())
-                    {
-=======
                     if (task.isSuccessful()){
->>>>>>> ee9d793a022c6701a06570b913551fd075fede20
                         Uri downloadUri = task.getResult();
+                        assert downloadUri != null;
                         String mUri = downloadUri.toString();
 
                         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
@@ -155,21 +147,13 @@ public class ProfileFragment extends Fragment {
                 pd.dismiss();
 
             });
-<<<<<<< HEAD
-=======
-
->>>>>>> ee9d793a022c6701a06570b913551fd075fede20
         }
         else
             Toast.makeText(getContext(), "No image selected", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-<<<<<<< HEAD
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-=======
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
->>>>>>> ee9d793a022c6701a06570b913551fd075fede20
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null)
