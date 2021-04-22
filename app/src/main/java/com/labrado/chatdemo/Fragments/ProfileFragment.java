@@ -108,7 +108,12 @@ public class ProfileFragment extends Fragment {
         pd.show();
 
         if (imageUri != null) {
+<<<<<<< HEAD
+            final StorageReference fileReference = storageReference.child(System.currentTimeMillis()
+                    +"."+getFileExtension(imageUri));
+=======
             final StorageReference fileReference = storageReference.child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
+>>>>>>> ee9d793a022c6701a06570b913551fd075fede20
 
             uploadTask = fileReference.getFile(imageUri);
             uploadTask.continueWith(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -123,7 +128,12 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
 
+<<<<<<< HEAD
+                    if (task.isSuccessful())
+                    {
+=======
                     if (task.isSuccessful()){
+>>>>>>> ee9d793a022c6701a06570b913551fd075fede20
                         Uri downloadUri = task.getResult();
                         String mUri = downloadUri.toString();
 
@@ -145,14 +155,21 @@ public class ProfileFragment extends Fragment {
                 pd.dismiss();
 
             });
+<<<<<<< HEAD
+=======
 
+>>>>>>> ee9d793a022c6701a06570b913551fd075fede20
         }
         else
             Toast.makeText(getContext(), "No image selected", Toast.LENGTH_SHORT).show();
     }
 
     @Override
+<<<<<<< HEAD
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+=======
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+>>>>>>> ee9d793a022c6701a06570b913551fd075fede20
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null)

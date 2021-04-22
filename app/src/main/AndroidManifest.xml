@@ -5,7 +5,11 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+<<<<<<< HEAD
+         tools:ignore="ScopedStorage"/>
+=======
         tools:ignore="ScopedStorage" />
+>>>>>>> ee9d793a022c6701a06570b913551fd075fede20
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application

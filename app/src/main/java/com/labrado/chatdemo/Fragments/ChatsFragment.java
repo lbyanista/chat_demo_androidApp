@@ -86,6 +86,20 @@ public class ChatsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mUsers.clear();
+<<<<<<< HEAD
+                for (DataSnapshot dataSnapshot : snapshot.getChildren())
+                {
+                    User user = dataSnapshot.getValue(User.class);
+                    //Display Chat for 1 user
+                    for (String id : usersList)
+                    {
+                        if (user.getId().equals(id))
+                        {
+                            if (mUsers.size() != 0)
+                            {
+                                for (User user1 : mUsers)
+                                {
+=======
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren())
                 {
@@ -97,18 +111,28 @@ public class ChatsFragment extends Fragment {
                             if (mUsers.size() != 0)
                             {
                                 for (User user1 : mUsers) {
+>>>>>>> ee9d793a022c6701a06570b913551fd075fede20
                                     if (!user.getId().equals(user1.getId()))
                                         mUsers.add(user);
                                 }
                             }
+<<<<<<< HEAD
+                        }
+=======
+>>>>>>> ee9d793a022c6701a06570b913551fd075fede20
                         else
                             mUsers.add(user);
                     }
                 }
+<<<<<<< HEAD
+                userAdapter = new UserAdapter(getContext(), mUsers, true);
+                recyclerView.setAdapter(userAdapter);
+=======
 
                 userAdapter = new UserAdapter(getContext(), mUsers);
                 recyclerView.setAdapter(userAdapter);
 
+>>>>>>> ee9d793a022c6701a06570b913551fd075fede20
             }
 
             @Override
