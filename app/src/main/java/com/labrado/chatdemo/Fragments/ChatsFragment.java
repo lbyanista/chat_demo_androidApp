@@ -55,8 +55,7 @@ public class ChatsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 usersList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren())
-                {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Chat chat = dataSnapshot.getValue(Chat.class);
 
                     assert chat != null;
@@ -89,7 +88,7 @@ public class ChatsFragment extends Fragment {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     User user = dataSnapshot.getValue(User.class);
-//                    Display Chat for 1 user
+//                    Display from Chat 1 user
                     for (String id : usersList) {
                         assert user != null;
                         if (user.getId().equals(id)){
@@ -98,10 +97,9 @@ public class ChatsFragment extends Fragment {
                                     if (!user.getId().equals(user1.getId()))
                                         mUsers.add(user);
                                 }
-                            }
+                            } else
+                                mUsers.add(user);
                         }
-                        else
-                            mUsers.add(user);
                     }
                 }
                 userAdapter = new UserAdapter(getContext(), mUsers, true);
