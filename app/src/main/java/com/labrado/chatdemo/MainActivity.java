@@ -65,14 +65,10 @@ public class MainActivity extends AppCompatActivity {
                 assert user != null;
                 username.setText(user.getUsername());
 
-                if (user.getImageURL().equals("default"))
-                {
+                if (user.getImageURL() != null && user.getImageURL().equals("default"))
                     profile_image.setImageResource(R.mipmap.ic_launcher);
-                }
                 else
-                {
                     Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
-                }
             }
 
             @Override

@@ -100,10 +100,10 @@ public class MessageActivity extends AppCompatActivity {
                 assert user != null;
                 username.setText(user.getUsername());
 
-                if (user.getImageURL().equals("default"))
+                if (user.getImageURL() != null && user.getImageURL().equals("default"))
                     profile_image.setImageResource(R.mipmap.ic_launcher);
                 else
-                    Glide.with(MessageActivity.this).load(user.getImageURL()).into(profile_image);
+                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
 
                 readMessage(fuser.getUid(), userid, user.getImageURL());
             }
@@ -113,8 +113,9 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
-    }
 
+        seenMessage(userid);
+    }
 
     private void seenMessage(String userid){
         reference = FirebaseDatabase.getInstance().getReference("Chats");

@@ -73,9 +73,9 @@ public class ProfileFragment extends Fragment {
                 assert user != null;
                 username.setText(user.getUsername());
 
-                if (user.getImageURL().equals("default")) {
+                if (user.getImageURL().equals("default"))
                     image_profile.setImageResource(R.mipmap.ic_launcher);
-                } else
+                else
                     Glide.with(Objects.requireNonNull(getContext())).load(user.getImageURL()).into(image_profile);
             }
 
