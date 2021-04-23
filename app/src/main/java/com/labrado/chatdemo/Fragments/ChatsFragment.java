@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.labrado.chatdemo.Adapter.UserAdapter;
-import com.labrado.chatdemo.Model.Chat;
+import com.labrado.chatdemo.Model.Chatlist;
 import com.labrado.chatdemo.Model.User;
 import com.labrado.chatdemo.R;
 
@@ -36,7 +36,7 @@ public class ChatsFragment extends Fragment {
     FirebaseUser fuser;
     DatabaseReference reference;
 
-    private  List<String> usersList;
+    private  List<Chatlist> usersList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,22 +50,18 @@ public class ChatsFragment extends Fragment {
 
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         usersList = new ArrayList<>();
-        reference = FirebaseDatabase.getInstance().getReference("Chats");
+
+        reference = FirebaseDatabase.getInstance().getReference("Chatlist").child(fuser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 usersList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Chat chat = dataSnapshot.getValue(Chat.class);
-
-                    assert chat != null;
-                    if (chat.getSender().equals(fuser.getUid()))
-                        usersList.add(chat.getReceiver());
-                    if (chat.getReceiver().equals(fuser.getUid()))
-                        usersList.add(chat.getSender());
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Chatlist chatlist = dataSnapshot.getValue(Chatlist.class);
+                    usersList.add(chatlist);
                 }
 
-                readChats();
+                ChatList();
             }
 
             @Override
@@ -73,44 +69,32 @@ public class ChatsFragment extends Fragment {
 
             }
         });
-
         return view;
     }
 
-    private void readChats() {
+    private void ChatList() {
         mUsers = new ArrayList<>();
         reference = FirebaseDatabase.getInstance().getReference("Users");
-
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mUsers.clear();
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     User user = dataSnapshot.getValue(User.class);
-//                    Display from Chat 1 user
-                    for (String id : usersList) {
-                        assert user != null;
-                        if (user.getId().equals(id)){
-                            if (mUsers.size() != 0) {
-                                for (User user1 : mUsers) {
-                                    if (!user.getId().equals(user1.getId()))
-                                        mUsers.add(user);
-                                }
-                            } else
-                                mUsers.add(user);
+                    for (Chatlist chatlist : usersList){
+                        if (user.getId().equals(chatlist.getId())){
+                            mUsers.add(user);
                         }
                     }
                 }
                 userAdapter = new UserAdapter(getContext(), mUsers, true);
                 recyclerView.setAdapter(userAdapter);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
     }
-    
 }
