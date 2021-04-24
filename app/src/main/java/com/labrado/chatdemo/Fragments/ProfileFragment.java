@@ -134,11 +134,10 @@ public class ProfileFragment extends Fragment {
                         map.put("imageURL", mUri);
                         reference.updateChildren(map);
 
-                        pd.dismiss();
                     } else {
                         Toast.makeText(getContext(), "Failed!", Toast.LENGTH_SHORT).show();
-                        pd.dismiss();
                     }
+                    pd.dismiss();
                 }
             }).addOnFailureListener(e -> {
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();

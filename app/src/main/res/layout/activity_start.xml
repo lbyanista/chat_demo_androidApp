@@ -12,28 +12,44 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Welcome to"
+        android:textSize="30dp"
+        android:textColor="#94BD22"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Chat app demo"
         android:textColor="#fff"
         android:textSize="25sp"
         android:textStyle="bold"/>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign-in"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/round_btn"
+        android:gravity="center_vertical|center_horizontal"
         android:textColor="#fff"
         android:layout_marginTop="100dp"
         android:id="@+id/login"/>
 
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign-up"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="#fff"
         android:layout_marginTop="10dp"
-        android:id="@+id/register"/>
+        android:gravity="center_vertical|center_horizontal"
+        android:background="@drawable/round_btn"
+        android:text="Sign-up"
+        android:textColor="#fff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TheEyes1337"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="150dp"/>
 
 
 </LinearLayout>
