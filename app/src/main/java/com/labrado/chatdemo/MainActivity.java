@@ -32,6 +32,7 @@ import java.util.Objects;
 import com.labrado.chatdemo.Fragments.ChatsFragment;
 import com.labrado.chatdemo.Fragments.ProfileFragment;
 import com.labrado.chatdemo.Fragments.UsersFragment;
+import com.labrado.chatdemo.Model.Chat;
 import com.labrado.chatdemo.Model.User;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -77,20 +78,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        TabLayout tabLayout = findViewById(R.id.tab_layout);
-        ViewPager viewPager = findViewById(R.id.viewpager);
+        final TabLayout tabLayout = findViewById(R.id.tab_layout);
+        final ViewPager viewPager = findViewById(R.id.viewpager);
 
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        reference = FirebaseDatabase.getInstance().getReference("Chats");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+                int unread = 0;
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Chat chat = dataSnapshot.getValue(Chat.class);
+                    if (chat.getReceiver().equals(firebaseUser.getUid()) && !chat.isIsseen())
+                        unread++;
+                }
 
-        viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
-        viewPagerAdapter.addFragment(new UsersFragment(), "Users");
-        viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
+                if (unread == 0)
+                    viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
+                else
+                    viewPagerAdapter.addFragment(new ChatsFragment(), "("+unread+") Chats");
+                viewPagerAdapter.addFragment(new UsersFragment(), "Users");
+                viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
 
 
-        viewPager.setAdapter(viewPagerAdapter);
+                viewPager.setAdapter(viewPagerAdapter);
 
-        tabLayout.setupWithViewPager(viewPager);
+                tabLayout.setupWithViewPager(viewPager);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
