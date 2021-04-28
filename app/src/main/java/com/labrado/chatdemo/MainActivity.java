@@ -37,7 +37,7 @@ import com.labrado.chatdemo.Model.User;
 import de.hdodenhof.circleimageview.CircleImageView;
 import com.onesignal.OneSignal;
 
-public class MainActivity extends AppCompatActivity {
+public class    MainActivity extends AppCompatActivity {
 
 
     //OneSignalAdded
@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 int unread = 0;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Chat chat = dataSnapshot.getValue(Chat.class);
+                    assert chat != null;
                     if (chat.getReceiver().equals(firebaseUser.getUid()) && !chat.isIsseen())
                         unread++;
                 }
