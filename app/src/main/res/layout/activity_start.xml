@@ -24,25 +24,32 @@
         android:textSize="25sp"
         android:textStyle="bold"/>
 
-    <Button
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_userlogin_foreground"
+            android:gravity="center_vertical|center_horizontal"
+            android:id="@+id/login"/>
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_adduser_foreground"
+            android:gravity="center_vertical|center_horizontal" />
+
+    </LinearLayout>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign-in"
-        android:background="@drawable/round_btn"
-        android:gravity="center_vertical|center_horizontal"
-        android:textColor="#fff"
-        android:layout_marginTop="100dp"
-        android:id="@+id/login"/>
-
-    <Button
-        android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:background="@drawable/round_btn"
-        android:text="Sign-up"
-        android:textColor="#fff" />
-
+        android:text="TheEyes"
+        android:textStyle="bold"
+        android:textColor="#A2B3E3"/>
 
 </LinearLayout>

@@ -35,8 +35,14 @@ import com.labrado.chatdemo.Fragments.UsersFragment;
 import com.labrado.chatdemo.Model.Chat;
 import com.labrado.chatdemo.Model.User;
 import de.hdodenhof.circleimageview.CircleImageView;
+import com.onesignal.OneSignal;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    //OneSignalAdded
+    private static final String ONESIGNAL_APP_ID = "3d713d0c-6153-4afe-a8aa-404884e35967";
+
 
     CircleImageView profile_image;
     TextView username;
@@ -46,7 +52,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        //OneSignaleAdded
+
+
+        // Enable verbose OneSignal logging to debug issues if needed.
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+
+        // OneSignal Initialization
+        OneSignal.initWithContext(this);
+        OneSignal.setAppId(ONESIGNAL_APP_ID);
+
+
+        //__________________
+
+
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
