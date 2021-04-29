@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AboutActivity">
+
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tool_bar"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="180dp"
+        android:padding="15dp">
+
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Shut'Up (chat app)"
+        android:id="@+id/nameapp"
+        android:textSize="30sp"
+        android:typeface="serif"
+        android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Demo"
+            android:typeface="serif"
+            android:gravity="center"
+            android:id="@+id/demo"
+            android:layout_below="@id/nameapp"/>
+
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/demo"
+        android:gravity="center"
+        android:typeface="serif"
+        android:text="Created &#38; Developed by : TheEyes"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

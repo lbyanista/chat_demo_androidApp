@@ -151,6 +151,12 @@ public class    MainActivity extends AppCompatActivity {
             return true;
         }
 
+        //About
+        if (item.getItemId() == R.id.About){
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+        }
+
         return false;
     }
 

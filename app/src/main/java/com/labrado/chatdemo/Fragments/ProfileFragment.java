@@ -71,13 +71,17 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
 
-                assert user != null;
+
+                if (getActivity() == null)
+                    return;
+
+//                assert user != null;
                 username.setText(user.getUsername());
 
                 if (user.getImageURL().equals("default"))
                     image_profile.setImageResource(R.mipmap.ic_launcher);
                 else
-                    Glide.with(Objects.requireNonNull(getContext())).load(user.getImageURL()).into(image_profile);
+                    Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
             }
 
             @Override
